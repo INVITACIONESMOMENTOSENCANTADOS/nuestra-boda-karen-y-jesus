@@ -161,6 +161,11 @@
         .image-container {
           animation: floatImage 0.8s ease-out forwards;
         }
+
+        /* Filtro dorado para la imagen de la lluvia de sobres */
+        .gold-filter {
+          filter: brightness(0) saturate(100%) invert(70%) sepia(55%) saturate(900%) hue-rotate(3deg) brightness(95%) contrast(95%);
+        }
     </style>
 </head>
 <body class="bg-gray-100">
@@ -323,7 +328,7 @@
 
         <!-- 6. Lluvia de Sobres -->
         <section class="snap-section w-full flex flex-col justify-center items-center bg-cover bg-center p-8 text-center reveal"
-                 style="background-image: url('https://raw.githubusercontent.com/INVITACIONESMOMENTOSENCANTADOS/nuestra-boda-karen-y-jesus/raw/main/Jesus%20y%20Karla%20(11).jpg');">
+                 style="background-image: url('https://raw.githubusercontent.com/INVITACIONESMOMENTOSENCANTADOS/nuestra-boda-karen-y-jesus/main/Jesus%20y%20Karla%20(11).jpg');">
             <div class="absolute inset-0 bg-white/40"></div>
             <div class="relative z-10 flex flex-col items-center justify-center h-full max-w-2xl px-4">
                 <h2 class="reveal-child font-great-vibes text-4xl mb-6 text-[#4377A3] italic">Lluvia de Sobres</h2>
@@ -334,7 +339,7 @@
 
                 <div class="reveal-child delay-2 flex justify-center items-end">
                     <div class="image-container">
-                        <img src="https://github.com/INVITACIONESMOMENTOSENCANTADOS/nuestra-boda-karen-y-jesus/raw/files/286b28a8dc7573e14be6549682210f9e-removebg-preview.png" alt="Lluvia de Sobres" class="w-80 h-auto drop-shadow-lg object-contain">
+                        <img src="https://raw.githubusercontent.com/INVITACIONESMOMENTOSENCANTADOS/nuestra-boda-karen-y-jesus/main/286b28a8dc7573e14be6549682210f9e-removebg-preview.png" alt="Lluvia de Sobres" class="gold-filter w-80 h-auto drop-shadow-lg object-contain">
                     </div>
                 </div>
             </div>
