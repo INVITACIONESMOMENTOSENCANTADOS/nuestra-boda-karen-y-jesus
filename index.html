@@ -152,19 +152,15 @@
         }
         .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-        /* Animación suave para los sobres */
-        @keyframes floatEnvelope {
+        /* Animación suave para la imagen */
+        @keyframes floatImage {
           0% { transform: translateY(10px) rotate(0deg); opacity: 0; }
           100% { transform: translateY(0) rotate(0deg); opacity: 1; }
         }
         
-        .envelope-container {
-          animation: floatEnvelope 0.8s ease-out forwards;
+        .image-container {
+          animation: floatImage 0.8s ease-out forwards;
         }
-        
-        .envelope-1 { animation-delay: 0.2s; }
-        .envelope-2 { animation-delay: 0.4s; }
-        .envelope-3 { animation-delay: 0.6s; }
     </style>
 </head>
 <body class="bg-gray-100">
@@ -336,41 +332,9 @@
                     El mayor regalo que podemos recibir es el honor de compartir este día tan especial con ustedes. Si además desean tener un detalle con nosotros, cualquier muestra de su cariño será recibida con profunda gratitud y nos acompañará en el inicio de esta nueva etapa de nuestras vidas.
                 </p>
 
-                <div class="reveal-child delay-2 flex justify-center items-end gap-6">
-                    <!-- Sobre 1 - Inclinado a la izquierda -->
-                    <div class="envelope-container envelope-1 -rotate-12">
-                        <svg width="80" height="100" viewBox="0 0 100 120" class="drop-shadow-lg">
-                            <!-- Sobre cerrado -->
-                            <rect x="8" y="35" width="84" height="60" fill="none" stroke="#B89C23" stroke-width="2.5" rx="3"/>
-                            <!-- Solapa superior -->
-                            <path d="M 8 35 L 50 60 L 92 35" fill="none" stroke="#B89C23" stroke-width="2.5" stroke-linejoin="round"/>
-                            <!-- Corazón -->
-                            <path d="M 50 75 C 50 75 42 68 42 62 C 42 58 45 55 48 55 C 50 55 50 56 50 56 C 50 56 50 55 52 55 C 55 55 58 58 58 62 C 58 68 50 75 50 75 Z" fill="#B89C23" stroke="#B89C23" stroke-width="0.5"/>
-                        </svg>
-                    </div>
-
-                    <!-- Sobre 2 - Centro (recto) -->
-                    <div class="envelope-container envelope-2">
-                        <svg width="90" height="110" viewBox="0 0 100 120" class="drop-shadow-lg">
-                            <!-- Sobre cerrado -->
-                            <rect x="8" y="25" width="84" height="70" fill="none" stroke="#B89C23" stroke-width="2.5" rx="3"/>
-                            <!-- Solapa superior -->
-                            <path d="M 8 25 L 50 55 L 92 25" fill="none" stroke="#B89C23" stroke-width="2.5" stroke-linejoin="round"/>
-                            <!-- Corazón -->
-                            <path d="M 50 80 C 50 80 40 70 40 62 C 40 56 44 52 48 52 C 50 52 50 53 50 53 C 50 53 50 52 52 52 C 56 52 60 56 60 62 C 60 70 50 80 50 80 Z" fill="#B89C23" stroke="#B89C23" stroke-width="0.5"/>
-                        </svg>
-                    </div>
-
-                    <!-- Sobre 3 - Inclinado a la derecha -->
-                    <div class="envelope-container envelope-3 rotate-12">
-                        <svg width="80" height="100" viewBox="0 0 100 120" class="drop-shadow-lg">
-                            <!-- Sobre cerrado -->
-                            <rect x="8" y="35" width="84" height="60" fill="none" stroke="#B89C23" stroke-width="2.5" rx="3"/>
-                            <!-- Solapa superior -->
-                            <path d="M 8 35 L 50 60 L 92 35" fill="none" stroke="#B89C23" stroke-width="2.5" stroke-linejoin="round"/>
-                            <!-- Corazón -->
-                            <path d="M 50 75 C 50 75 42 68 42 62 C 42 58 45 55 48 55 C 50 55 50 56 50 56 C 50 56 50 55 52 55 C 55 55 58 58 58 62 C 58 68 50 75 50 75 Z" fill="#B89C23" stroke="#B89C23" stroke-width="0.5"/>
-                        </svg>
+                <div class="reveal-child delay-2 flex justify-center items-end">
+                    <div class="image-container">
+                        <img src="https://github.com/INVITACIONESMOMENTOSENCANTADOS/nuestra-boda-karen-y-jesus/raw/files/286b28a8dc7573e14be6549682210f9e-removebg-preview.png" alt="Lluvia de Sobres" class="w-80 h-auto drop-shadow-lg object-contain">
                     </div>
                 </div>
             </div>
