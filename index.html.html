@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestra Boda Jesús y Karla 🩵</title>
+
+    <!-- Vista previa al compartir (WhatsApp, Facebook, etc.) -->
+    <meta property="og:title" content="Nuestra Boda Jesús y Karla 🩵">
+    <meta property="og:description" content="Nuestra Boda Jesús y Karla 🩵">
+    <meta property="og:image" content="https://github.com/regina1503/nuestra-boda-karen-y-jesus/blob/main/portadas%20karen%20y.jpg?raw=true">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Nuestra Boda Jesús y Karla 🩵">
+    <meta name="twitter:description" content="Nuestra Boda Jesús y Karla 🩵">
+    <meta name="twitter:image" content="https://github.com/regina1503/nuestra-boda-karen-y-jesus/blob/main/portadas%20karen%20y.jpg?raw=true">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+    <style>
+        .font-great-vibes { font-family: 'Great Vibes', cursive; }
+        .font-montserrat { font-family: 'Montserrat', sans-serif; }
+        .snap-container { scroll-snap-type: y mandatory; overflow-y: scroll; height: 100vh; scroll-behavior: smooth; }
+        .snap-section { scroll-snap-align: start; height: 100vh; position: relative; overflow: hidden; }
+
+        @media (prefers-reduced-motion: reduce) {
+          *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+        }
+
+        /* Animaciones de aparición al hacer scroll */
+        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 1s ease-out, transform 1s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        .reveal-child { opacity: 0; transform: translateY(18px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .reveal.active .reveal-child { opacity: 1; transform: translateY(0); }
+        .reveal.active .delay-1 { transition-delay: 0.15s; }
+        .reveal.active .delay-2 { transition-delay: 0.3s; }
+        .reveal.active .delay-3 { transition-delay: 0.45s; }
+        .reveal.active .delay-4 { transition-delay: 0.6s; }
+        .reveal.active .delay-5 { transition-delay: 0.75s; }
+
+        /* Pantalla de inicio: fondo floral con sello circular */
+        .overlay {
+          position: fixed; inset: 0; z-index: 50; display: flex; align-items: center; justify-content: center;
+          background: #fdfbf5;
+          transition: opacity 0.7s ease;
+          overflow: hidden;
+        }
+        .overlay.closing { opacity: 0; pointer-events: none; }
+
+        .welcome-svg { width: 100%; height: 100%; max-width: 480px; }
+
+        .seal-group { cursor: pointer; transform-origin: center; transform-box: fill-box; transition: transform 0.35s ease; animation: sealPulse 2.8s ease-in-out infinite; }
+        .seal-group:hover { transform: scale(1.07); }
+        .seal-group:active { transform: scale(0.95); }
+        @keyframes sealPulse {
+          0%, 100% { filter: drop-shadow(0 3px 6px rgba(30, 55, 85, 0.4)); }
+          50% { filter: drop-shadow(0 4px 10px rgba(30, 55, 85, 0.55)); }
+        }
+
+        .hint-text-svg { animation: hintFadeSvg 2s ease-in-out infinite; }
+        @keyframes hintFadeSvg {
+          0%, 100% { opacity: 0.55; }
+          50% { opacity: 1; }
+        }
+
+        
+        /* Portada: entrada escalonada al abrir */
+        .cover-title, .cover-names {
+          opacity: 0; transform: translateY(20px);
+          transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+        .cover-revealed .cover-title { opacity: 1; transform: translateY(0); transition-delay: 0.2s; }
+        .cover-revealed .cover-names { opacity: 1; transform: translateY(0); transition-delay: 0.5s; }
+
+        /* Reproductor minimalista dorado */
+        .audio-player-wrapper { display: flex; flex-direction: column; align-items: center; gap: 15px; width: 100%; max-width: 300px; color: #B89C23; }
+        .progress-container { width: 100%; height: 2px; background: rgba(184, 156, 35, 0.3); position: relative; cursor: pointer; }
+        .progress-bar { height: 100%; background: #B89C23; width: 0%; transition: width 0.1s; }
+        .progress-handle { width: 10px; height: 10px; background: #B89C23; border-radius: 50%; position: absolute; top: -4px; left: 0%; transition: left 0.1s; }
+        .controls { display: flex; align-items: center; gap: 20px; font-size: 20px; margin-top: 10px; color: #B89C23; }
+        .ctrl-btn { cursor: pointer; transition: transform 0.2s ease, opacity 0.2s ease; display: flex; }
+        .ctrl-btn:hover { transform: scale(1.15); }
+        .ctrl-btn:active { transform: scale(0.9); }
+        .main-btn { width: 50px; height: 50px; border: 2px solid #B89C23; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #B89C23; transition: transform 0.2s ease, background-color 0.2s ease; }
+        .main-btn:hover { transform: scale(1.08); background-color: rgba(184, 156, 35, 0.08); }
+        .main-btn:active { transform: scale(0.94); }
+
+        .heart-beat { animation: heartBeat 1.6s ease-in-out infinite; display: inline-block; }
+        @keyframes heartBeat {
+          0%, 100% { transform: scale(1); }
+          50% { transform: scale(1.25); }
+        }
+
+        /* Botón CTA con micro-interacción + shimmer */
+        .cta-btn { position: relative; overflow: hidden; transition: transform 0.25s ease, box-shadow 0.25s ease; }
+        .cta-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(184, 156, 35, 0.4); }
+        .cta-btn:active { transform: translateY(0); }
+        .cta-btn::before {
+          content: ''; position: absolute; top: 0; left: -75%; width: 50%; height: 100%;
+          background: linear-gradient(120deg, transparent, rgba(255,255,255,0.45), transparent);
+          transform: skewX(-20deg);
+        }
+        .cta-btn:hover::before { animation: shimmer 1.1s ease; }
+        @keyframes shimmer {
+          0% { left: -75%; }
+          100% { left: 130%; }
+        }
+
+        /* Números de fecha con entrada individual */
+        .date-number { display: inline-block; opacity: 0; transform: translateY(14px) scale(0.85); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .reveal.active .date-number { opacity: 1; transform: translateY(0) scale(1); }
+        .reveal.active .date-number:nth-of-type(1) { transition-delay: 0.5s; }
+        .reveal.active .date-number:nth-of-type(2) { transition-delay: 0.65s; }
+        .reveal.active .date-number:nth-of-type(3) { transition-delay: 0.8s; }
+        .date-number:hover { transform: scale(1.15); color: #9c7d1c; }
+
+        /* Imagen del salón con hover suave */
+        .salon-img { transition: transform 0.5s ease, filter 0.5s ease; }
+        .salon-img:hover { transform: scale(1.04) rotate(-1deg); }
+
+        /* Fondo con leve parallax al hacer scroll */
+        .parallax-bg { transition: background-position 0.1s linear; }
+
+        /* Galería con aparición escalonada e hover */
+        .gallery-img { opacity: 0; transform: translateY(35px) scale(0.96); transition: opacity 0.9s ease-out, transform 0.9s ease-out; }
+        .reveal.active .gallery-img { opacity: 1; transform: translateY(0) scale(1); }
+        .reveal.active .gallery-row > .gallery-img:nth-child(1) { transition-delay: 0.55s; }
+        .reveal.active .gallery-row > .gallery-img:nth-child(2) { transition-delay: 0.9s; }
+        .reveal.active > div > .gallery-img:first-child { transition-delay: 0.2s; }
+        .gallery-img img { transition: transform 0.4s ease; }
+        .gallery-img:hover img { transform: scale(1.04); }
+
+        /* Inputs del formulario con foco animado */
+        .rsvp-input { transition: border-color 0.25s ease, box-shadow 0.25s ease; }
+        .rsvp-input:focus { outline: none; border-color: #B89C23; box-shadow: 0 0 0 3px rgba(184, 156, 35, 0.18); }
+
+        /* Línea de fechas con pequeño pulso */
+        .date-divider { animation: dividerGlow 2.5s ease-in-out infinite; }
+        @keyframes dividerGlow {
+          0%, 100% { opacity: 0.5; }
+          50% { opacity: 1; }
+        }
+
+        /* Toast de confirmación */
+        .toast {
+          position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(20px);
+          background: #4377A3; color: white; padding: 12px 22px; border-radius: 999px;
+          font-family: 'Montserrat', sans-serif; font-size: 14px; opacity: 0; z-index: 60;
+          transition: opacity 0.3s ease, transform 0.3s ease; pointer-events: none;
+          box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+        }
+        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+        /* Animación suave para la imagen */
+        @keyframes floatImage {
+          0% { transform: translateY(10px) rotate(0deg); opacity: 0; }
+          100% { transform: translateY(0) rotate(0deg); opacity: 1; }
+        }
+        
+        .image-container {
+          animation: floatImage 0.8s ease-out forwards;
+        }
+
+        /* Icono de la lluvia de sobres recoloreado mediante máscara CSS (color exacto, sin tintes raros) */
+        .envelope-icon {
+          width: 64px;
+          height: 64px;
+          -webkit-mask-image: url('https://raw.githubusercontent.com/INVITACIONESMOMENTOSENCANTADOS/nuestra-boda-karen-y-jesus/main/286b28a8dc7573e14be6549682210f9e-removebg-preview.png');
+          mask-image: url('https://raw.githubusercontent.com/INVITACIONESMOMENTOSENCANTADOS/nuestra-boda-karen-y-jesus/main/286b28a8dc7573e14be6549682210f9e-removebg-preview.png');
+          -webkit-mask-size: contain;
+          mask-size: contain;
+          -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+          -webkit-mask-position: center;
+          mask-position: center;
+          background-color: #B89C23; /* dorado; cambia a #4377A3 si prefieres azul */
+          filter: drop-shadow(0 4px 8px rgba(0,0,0,0.25));
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <!-- Pantalla de inicio -->
+    <div id="overlay" class="overlay">
+        <svg class="welcome-svg" viewBox="0 0 280 500" preserveAspectRatio="xMidYMid meet">
+            <rect width="280" height="500" fill="#fdfbf5"/>
+
+            <!-- Rama floral esquina superior izquierda -->
+            <g opacity="0.92">
+                <path d="M0 0 C30 10 50 30 55 60 C58 80 50 95 60 110 C40 100 25 80 15 55 C8 35 5 15 0 0 Z" fill="#a9c3da"/>
+                <path d="M0 0 C20 5 35 18 42 38 C46 52 40 62 48 72 C32 65 22 50 16 32 C10 18 5 8 0 0 Z" fill="#4377A3" opacity="0.55"/>
+                <ellipse cx="22" cy="18" rx="13" ry="8" fill="#c9d9e8" transform="rotate(35 22 18)"/>
+                <ellipse cx="38" cy="35" rx="11" ry="7" fill="#dde8f0" transform="rotate(60 38 35)"/>
+                <ellipse cx="14" cy="42" rx="9" ry="6" fill="#b8d4c8" transform="rotate(10 14 42)"/>
+                <circle cx="48" cy="55" r="4" fill="#d9b65c"/>
+                <circle cx="20" cy="60" r="3" fill="#d9b65c"/>
+                <circle cx="34" cy="22" r="2.2" fill="#d9b65c"/>
+            </g>
+
+            <!-- Rama floral esquina inferior derecha -->
+            <g opacity="0.92">
+                <path d="M280 500 C250 490 230 470 225 440 C222 420 230 405 220 390 C240 400 255 420 265 445 C272 465 275 485 280 500 Z" fill="#a9c3da"/>
+                <path d="M280 500 C260 495 245 482 238 462 C234 448 240 438 232 428 C248 435 258 450 264 468 C270 482 275 492 280 500 Z" fill="#4377A3" opacity="0.55"/>
+                <ellipse cx="258" cy="482" rx="13" ry="8" fill="#c9d9e8" transform="rotate(35 258 482)"/>
+                <ellipse cx="242" cy="465" rx="11" ry="7" fill="#dde8f0" transform="rotate(60 242 465)"/>
+                <ellipse cx="266" cy="458" rx="9" ry="6" fill="#b8d4c8" transform="rotate(10 266 458)"/>
+                <circle cx="232" cy="445" r="4" fill="#d9b65c"/>
+                <circle cx="260" cy="440" r="3" fill="#d9b65c"/>
+                <circle cx="246" cy="478" r="2.2" fill="#d9b65c"/>
+            </g>
+
+            <!-- Línea divisoria con acento dorado -->
+            <line x1="160" y1="20" x2="160" y2="480" stroke="#4377A3" stroke-width="1.5" opacity="0.5"/>
+            <circle cx="160" cy="250" r="2.5" fill="#d9b65c"/>
+
+            <!-- Sello circular -->
+            <g class="seal-group" transform="translate(135 250)" onclick="abrirInvitacion()">
+                <circle r="52" fill="#5f8cb8"/>
+                <circle r="52" fill="none" stroke="#2e5680" stroke-width="1" opacity="0.4"/>
+                <circle r="44" fill="none" stroke="#d9b65c" stroke-width="1" opacity="0.55"/>
+                <ellipse cx="-18" cy="-22" rx="20" ry="11" fill="#ffffff" opacity="0.2" transform="rotate(-25 -18 -22)"/>
+                <g stroke="#eef3f8" stroke-width="2" fill="none" opacity="0.9" stroke-linecap="round">
+                    <path d="M0 -28 C4 -18 4 -8 0 0 C-4 8 -4 18 0 28"/>
+                    <path d="M0 -20 C8 -16 12 -8 8 0"/>
+                    <path d="M0 -20 C-8 -16 -12 -8 -8 0"/>
+                    <path d="M0 -4 C8 0 12 8 8 16"/>
+                    <path d="M0 -4 C-8 0 -12 8 -8 16"/>
+                </g>
+                <circle cx="0" cy="-28" r="2" fill="#d9b65c"/>
+            </g>
+
+            <!-- Texto vertical curvado -->
+            <text class="hint-text-svg" text-anchor="middle" font-family="Georgia, serif" font-size="11" letter-spacing="2.5" fill="#4377A3" transform="translate(60 250) rotate(-90)">Haz clic para abrir</text>
+        </svg>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <div class="snap-container">
+        <!-- 1. Portada -->
+        <section id="coverSection" class="snap-section w-full flex flex-col justify-start pt-[5vh] items-center text-center bg-cover bg-center"
+                 style="background-image: url('https://raw.githubusercontent.com/regina1503/nuestra-boda-karen-y-jesus/main/Jesus%20y%20Karla%20(3).jpg');">
+            <div class="z-10 mt-[7vh]">
+                <h1 class="cover-title font-montserrat text-sm tracking-[0.475em] uppercase text-gray-900 mb-6">Nuestra Boda</h1>
+                <h2 class="cover-names font-great-vibes text-6xl md:text-8xl text-blue-600 leading-none">Jesús &<br>Karla</h2>
+            </div>
+        </section>
+
+        <!-- 2. Detalles -->
+        <section class="snap-section w-full flex flex-col justify-center items-center text-center bg-cover bg-center reveal"
+                 style="background-image: url('https://raw.githubusercontent.com/regina1503/nuestra-boda-karen-y-jesus/main/Jesus%20y%20Karla%20(4).jpg');">
+            <div class="z-10 p-6 flex flex-col items-center text-[#4377A3] drop-shadow-lg">
+                <h3 class="reveal-child font-great-vibes text-4xl mb-4">Nuestra<br>Canción</h3>
+
+                <div class="audio-player-wrapper reveal-child delay-1">
+                    <div class="w-full flex justify-end mb-2 text-[#B89C23]"><span class="heart-beat">♥</span></div>
+                    <div class="progress-container" onclick="seek(event)">
+                        <div id="progress" class="progress-bar"></div>
+                        <div id="handle" class="progress-handle"></div>
+                    </div>
+                    <div class="controls">
+                        <div class="ctrl-btn" onclick="skip(-10)" title="Retroceder 10s">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="#B89C23"><path d="M16 17.01V13h-4v2l-5-3 5-3v2h4V6.99L21 12l-5 5.01zM7 11H5v2h2v-2zM7 7H5v2h2V7z"/></svg>
+                        </div>
+                        <div class="ctrl-btn" onclick="restart()" title="Reiniciar">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="#B89C23"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+                        </div>
+                        <div class="main-btn" onclick="togglePlay()">
+                            <svg id="playIcon" width="18" height="18" viewBox="0 0 24 24" fill="#B89C23">
+                                <rect x="6" y="5" width="4" height="14" rx="1"></rect>
+                                <rect x="14" y="5" width="4" height="14" rx="1"></rect>
+                            </svg>
+                        </div>
+                        <div class="ctrl-btn" onclick="goToEnd()" title="Ir al final">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="#B89C23"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
+                        </div>
+                        <div class="ctrl-btn" onclick="skip(10)" title="Adelantar 10s">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="#B89C23"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/></svg>
+                        </div>
+                    </div>
+                    <audio id="music" ontimeupdate="updateProgress()" preload="auto">
+                        <source src="https://github.com/regina1503/nuestra-boda-karen-y-jesus/raw/main/Kany%20Garc%C3%ADa%20-%20Mi%20Plan%20de%20Vida%20(con%20Abel%20Pintos%20-%20Official%20Video).mp3" type="audio/mpeg">
+                    </audio>
+                </div>
+
+                <p class="reveal-child delay-2 font-montserrat italic text-[0.8505em] md:text-[1.701em] max-w-lg mb-8 mt-6 text-center font-bold">
+                    "Sabes que estás enamorado cuando no quieres acostarte porque la realidad es por fin mejor que tus sueños"
+                </p>
+                <div class="reveal-child delay-3 flex items-center gap-4 text-[#B89C23] mt-4 font-great-vibes text-5xl">
+                    <span class="date-number">30</span><span class="date-divider w-0.5 h-10 border-r-2 border-dotted border-[#B89C23]"></span>
+                    <span class="date-number">07</span><span class="date-divider w-0.5 h-10 border-r-2 border-dotted border-[#B89C23]"></span>
+                    <span class="date-number">27</span>
+                </div>
+                <p class="reveal-child delay-4 font-great-vibes text-3xl text-[#4377A3] mt-6">Te esperamos<br>para celebrar<br><span class="font-montserrat font-bold tracking-widest">JUNTOS</span></p>
+            </div>
+        </section>
+
+        <!-- 3. Papás -->
+        <section class="snap-section w-full flex flex-col justify-center items-center bg-[#E0F2FE] py-4 px-4 reveal">
+            <h2 class="reveal-child font-great-vibes text-4xl mb-2 text-[#4377A3] text-center leading-tight">Nuestros<br>Papás</h2>
+            <div class="reveal-child delay-1 font-montserrat text-center space-y-0.5 text-2xl text-[#4377A3]">
+                <p>Jesús Salas Madrid</p>
+                <p>&</p>
+                <p>Dalila Orozco Ochoa</p>
+                <div class="py-2 flex items-center justify-center"><span class="w-8 h-px bg-[#4377A3]"></span><span class="px-2 heart-beat">♥</span><span class="w-8 h-px bg-[#4377A3]"></span></div>
+                <p>María Arcelia Palacios</p>
+                <p>&</p>
+                <p>César Torrero Ramos</p>
+            </div>
+        </section>
+
+        <!-- Imagen intermedia -->
+        <section class="snap-section w-full flex flex-col justify-center items-center text-center bg-cover bg-center p-6 reveal"
+                 style="background-image: url('https://raw.githubusercontent.com/INVITACIONESMOMENTOSENCANTADOS/nuestra-boda-karen-y-jesus/main/Jesus%20y%20Karla%20(1).jpg');">
+        </section>
+
+        <!-- 4. Recepción -->
+        <section class="snap-section w-full flex flex-col justify-center items-center bg-cover bg-center p-8 text-center reveal"
+                 style="background-image: url('https://raw.githubusercontent.com/regina1503/nuestra-boda-karen-y-jesus/main/Jesus%20y%20Karla%20(8).jpg');">
+            <div class="absolute inset-0 bg-white/70"></div>
+            <div class="relative z-10 flex flex-col items-center">
+                <h2 class="reveal-child font-great-vibes text-4xl mb-6 text-[#4377A3]">Recepción</h2>
+                <div class="reveal-child delay-1 font-montserrat text-[#4377A3] text-lg space-y-2 mb-8">
+                    <p class="font-bold text-xl">SALÓN JARDÍN GRAND OASIS</p>
+                    <p>2:30 PM</p>
+                </div>
+                <img src="https://raw.githubusercontent.com/regina1503/Mis-xv-a-os-Monserrat-Sarai/main/image-removebg-preview%20(1).png" alt="Salón" class="reveal-child delay-2 salon-img w-64 h-auto mb-6 object-contain">
+                <a href="https://www.google.com/maps/place/Sal%C3%B3n+y+Jard%C3%ADn+Grand+Oasis,+los+juzgados,+Ignacio+L%C3%B3pez+Ray%C3%B3n+Supermanzana+Por,+Independencia,+22710+Playas+de+Rosarito,+B.C./data=!4m2!3m1!1s0x80d931a609705235:0xf20d8bd33e80ad23!18m1!1e1?entry=gps&coh=192189&g_ep=CAESBzI2LjIzLjUYACCenQoqnwEsOTQyNjc3MjcsOTQyOTIxOTUsOTQyOTk1MzIsMTAwNzk2NDk4LDEwMDc5Nzc2MSwxMDA3OTY1MzUsOTQyODA1NzYsMTAwODExOTU5LDk0MjA3Mzk0LDk0MjA3NTA2LDk0MjA4NTA2LDk0MjE4NjUzLDk0MjI5ODM5LDEwMDgwODY1OSw5NDI3NTE2OCw5NDI3OTYxOSwxMDA4MjAyMzJCAk1Y&skid=5e73cc7f-b0c7-4d1e-bd4f-ef97a4af95dd" target="_blank" rel="noopener" class="reveal-child delay-3 cta-btn px-8 py-4 bg-[#B89C23] text-white font-montserrat rounded-full shadow-lg">Ver ubicación</a>
+            </div>
+        </section>
+
+        <!-- 5. Galería -->
+        <section class="snap-section w-full flex flex-col justify-center items-center bg-gray-50 p-4 reveal">
+            <h2 class="reveal-child font-great-vibes text-4xl mb-4 text-[#4377A3] -mt-[5vh]">Nuestros momentos</h2>
+            <div class="flex flex-col gap-3 w-full max-w-sm h-[74vh] md:h-[66vh]">
+                <div class="gallery-img overflow-hidden rounded-lg shadow-md flex-[1.1] min-h-0"><img src="https://raw.githubusercontent.com/regina1503/nuestra-boda-karen-y-jesus/main/WhatsApp%20Image%202026-06-04%20at%209.00.25%20AM.jpeg" class="w-full h-full object-cover"></div>
+                <div class="flex gap-3 flex-[1.4] min-h-0 gallery-row">
+                    <div class="gallery-img overflow-hidden rounded-lg shadow-md flex-1 min-h-0"><img src="https://raw.githubusercontent.com/regina1503/nuestra-boda-karen-y-jesus/main/WhatsApp%20Image%202026-06-04%20at%209.00.24%20AM.jpeg" class="w-full h-full object-cover"></div>
+                    <div class="gallery-img overflow-hidden rounded-lg shadow-md flex-1 min-h-0"><img src="https://github.com/regina1503/nuestra-boda-karen-y-jesus/raw/main/ChatGPT%20Image%2026%20jun%202026%2C%2018_59_16.png" class="w-full h-full object-cover"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Lluvia de Sobres -->
+        <section class="snap-section w-full flex flex-col justify-center items-center bg-cover bg-center p-8 text-center reveal"
+                 style="background-image: url('https://raw.githubusercontent.com/INVITACIONESMOMENTOSENCANTADOS/nuestra-boda-karen-y-jesus/main/Jesus%20y%20Karla%20(11).jpg');">
+            <div class="relative z-10 flex flex-col items-center justify-center h-full max-w-2xl px-4" style="transform: translateY(-22%);">
+                <h2 class="reveal-child font-great-vibes text-[3.13rem] mb-3 text-[#4377A3] italic" style="transform: translateY(-1%);">Lluvia de Sobres</h2>
+                
+                <p class="reveal-child delay-1 font-montserrat text-[0.6744rem] md:text-[0.7704rem] text-[#4377A3] leading-relaxed mb-3" style="transform: translateY(-3%);">
+                    El mayor regalo que podemos recibir es el honor de compartir este día tan especial con ustedes. Si además desean tener un detalle con nosotros, cualquier muestra de su cariño será recibida con profunda gratitud y nos acompañará en el inicio de esta nueva etapa de nuestras vidas.
+                </p>
+
+                <div class="reveal-child delay-2 flex justify-center items-end -mt-3" style="transform: translateY(-3%);">
+                    <div class="image-container">
+                        <div class="envelope-icon" role="img" aria-label="Lluvia de Sobres"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. Frase Especial -->
+        <section class="snap-section w-full flex flex-col justify-center items-center text-center bg-cover bg-center p-6 reveal"
+                 style="background-image: url('https://raw.githubusercontent.com/regina1503/nuestra-boda-karen-y-jesus/main/Jesus%20y%20Karla%20(7).jpg');">
+        </section>
+
+        <!-- 8. Dress Code -->
+        <section class="snap-section w-full flex flex-col justify-center items-center bg-cover bg-center p-8 text-center reveal"
+                 style="background-image: url('https://raw.githubusercontent.com/regina1503/nuestra-boda-karen-y-jesus/main/Jesus%20y%20Karla%20(8).jpg');">
+            <div class="absolute inset-0 bg-white/50"></div>
+            <div class="relative z-10">
+                <h2 class="reveal-child font-great-vibes text-[3.06rem] mb-6 text-[#4377A3]">Dress Code</h2>
+                <p class="reveal-child delay-1 font-montserrat text-xl text-[#4377A3] mb-4">Formal elegante</p>
+                <p class="reveal-child delay-2 font-montserrat text-[0.7225rem] text-[#4377A3] max-w-md italic mb-6">
+                    Les pedimos evitar el uso de colores azul cielo y azul rey.
+                    <img src="https://github.com/regina1503/Mis-xv-a-os-Monserrat-Sarai/blob/main/87bd010aec6ebecaa9aef69642229a6b-Photoroom.png?raw=true" class="w-48 h-auto mx-auto mt-4" alt="Icono Vestimenta">
+                </p>
+            </div>
+        </section>
+
+        <!-- Imagen intermedia -->
+        <section class="snap-section w-full flex flex-col justify-center items-center text-center bg-cover bg-center p-6 reveal"
+                 style="background-image: url('https://raw.githubusercontent.com/INVITACIONESMOMENTOSENCANTADOS/nuestra-boda-karen-y-jesus/main/Jesus%20y%20Karla%20(13).jpg');">
+        </section>
+
+        <!-- 9. Asistencia -->
+        <section class="snap-section w-full flex flex-col justify-center items-center bg-cover bg-center p-6 text-center reveal"
+                 style="background-image: url('https://raw.githubusercontent.com/regina1503/nuestra-boda-karen-y-jesus/main/Jesus%20y%20Karla%20(9).jpg');">
+            <div class="absolute inset-0 bg-white/70"></div>
+            <div class="relative z-10 w-full max-w-sm flex flex-col items-center -mt-[35vh]">
+                <h2 class="reveal-child font-great-vibes text-[2.3625rem] mb-8 text-[#4377A3] text-center">Confirmar<br>Asistencia</h2>
+                <form id="rsvpForm" class="reveal-child delay-1 w-full space-y-4">
+                    <input type="text" id="nombre" placeholder="Nombre completo" minlength="8" required class="rsvp-input w-full p-3 border rounded-lg">
+                    <select id="asistencia" class="rsvp-input w-full p-3 border rounded-lg">
+                        <option value="Sí, asistiré">Sí, asistiré</option>
+                        <option value="No podré asistir">No podré asistir</option>
+                    </select>
+                    <button type="button" onclick="enviarWhatsApp()" class="cta-btn w-full py-4 bg-[#B89C23] text-white rounded-lg font-bold hover:bg-[#a08a20]">Enviar a WhatsApp</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- 10. Cierre -->
+        <section class="snap-section w-full flex flex-col justify-start items-center p-6 text-center bg-cover bg-center reveal"
+                 style="background-image: url('https://github.com/regina1503/nuestra-boda-karen-y-jesus/raw/main/Jesus%20y%20Karla%20(10).jpg');">
+            <div class="relative z-10 flex flex-col items-center mt-[5vh]">
+                <h2 class="reveal-child font-great-vibes text-6xl text-[#B89C23] drop-shadow-md">¡Te esperamos!</h2>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const audio = document.getElementById('music');
+        const progress = document.getElementById('progress');
+        const handle = document.getElementById('handle');
+        const playIcon = document.getElementById('playIcon');
+        const overlay = document.getElementById('overlay');
+        const coverSection = document.getElementById('coverSection');
+        const toast = document.getElementById('toast');
+
+        const PAUSE_ICON = '<rect x="6" y="5" width="4" height="14" rx="1"></rect><rect x="14" y="5" width="4" height="14" rx="1"></rect>';
+        const PLAY_ICON = '<polygon points="6,4 20,12 6,20"></polygon>';
+        function setPlayIcon(playing) {
+            playIcon.innerHTML = playing ? PAUSE_ICON : PLAY_ICON;
+        }
+
+        function showToast(msg) {
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2600);
+        }
+
+        function abrirInvitacion() {
+            overlay.classList.add('closing');
+            setTimeout(() => { overlay.style.display = 'none'; }, 700);
+
+            // Disparar la animación de entrada de la portada
+            coverSection.classList.add('cover-revealed');
+
+            // Intentar reproducir el audio; si el navegador lo bloquea, no rompemos nada
+            try {
+                audio.currentTime = 5;
+                const playPromise = audio.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(() => {
+                        // Autoplay bloqueado: el usuario podrá darle play manualmente
+                        setPlayIcon(false);
+                    });
+                }
+            } catch (e) {
+                setPlayIcon(false);
+            }
+        }
+
+        function togglePlay() {
+            if (audio.paused) {
+                audio.play().catch(() => {});
+                setPlayIcon(true);
+            } else {
+                audio.pause();
+                setPlayIcon(false);
+            }
+        }
+
+        function updateProgress() {
+            if (!isFinite(audio.duration) || audio.duration === 0) return;
+            const percent = (audio.currentTime / audio.duration) * 100;
+            progress.style.width = percent + "%";
+            handle.style.left = percent + "%";
+        }
+
+        function seek(e) {
+            if (!isFinite(audio.duration) || audio.duration === 0) return;
+            const container = e.target.closest('.progress-container');
+            const rect = container.getBoundingClientRect();
+            const clickPosition = e.clientX - rect.left;
+            const containerWidth = container.offsetWidth;
+            const ratio = Math.min(Math.max(clickPosition / containerWidth, 0), 1);
+            audio.currentTime = ratio * audio.duration;
+        }
+
+        function skip(seconds) {
+            if (!isFinite(audio.duration)) return;
+            audio.currentTime = Math.min(Math.max(audio.currentTime + seconds, 0), audio.duration);
+        }
+
+        function restart() {
+            audio.currentTime = 0;
+        }
+
+        function goToEnd() {
+            if (!isFinite(audio.duration)) return;
+            audio.currentTime = Math.max(audio.duration - 1, 0);
+        }
+
+        function enviarWhatsApp() {
+            const nombre = document.getElementById('nombre').value.trim();
+            const asistencia = document.getElementById('asistencia').value;
+            if (nombre.length < 8) {
+                showToast("Por favor ingresa tu nombre completo");
+                return;
+            }
+            const mensaje = `Hola, mi nombre es ${nombre}. Confirmo: ${asistencia} a la boda de Jesús y Karla.`;
+            window.open(`https://wa.me/526642047860?text=${encodeURIComponent(mensaje)}`);
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+        // Parallax sutil: las secciones con imagen de fondo se desplazan un poco más lento que el scroll
+        const parallaxSections = document.querySelectorAll('.snap-section[style*="background-image"]');
+        const container = document.querySelector('.snap-container');
+        function updateParallax() {
+            const scrollTop = container.scrollTop;
+            parallaxSections.forEach((sec) => {
+                const offset = sec.offsetTop;
+                const distance = scrollTop - offset;
+                const shift = distance * 0.15;
+                sec.style.backgroundPosition = `center calc(50% + ${shift}px)`;
+            });
+        }
+        container.addEventListener('scroll', updateParallax, { passive: true });
+        updateParallax();
+    </script>
+</body>
+</html>
