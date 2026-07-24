@@ -151,32 +151,6 @@
           box-shadow: 0 6px 18px rgba(0,0,0,0.15);
         }
         .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-
-        /* Animación suave para la imagen */
-        @keyframes floatImage {
-          0% { transform: translateY(10px) rotate(0deg); opacity: 0; }
-          100% { transform: translateY(0) rotate(0deg); opacity: 1; }
-        }
-        
-        .image-container {
-          animation: floatImage 0.8s ease-out forwards;
-        }
-
-        /* Icono de la lluvia de sobres recoloreado mediante máscara CSS (color exacto, sin tintes raros) */
-        .envelope-icon {
-          width: 64px;
-          height: 64px;
-          -webkit-mask-image: url('https://raw.githubusercontent.com/INVITACIONESMOMENTOSENCANTADOS/nuestra-boda-karen-y-jesus/main/286b28a8dc7573e14be6549682210f9e-removebg-preview.png');
-          mask-image: url('https://raw.githubusercontent.com/INVITACIONESMOMENTOSENCANTADOS/nuestra-boda-karen-y-jesus/main/286b28a8dc7573e14be6549682210f9e-removebg-preview.png');
-          -webkit-mask-size: contain;
-          mask-size: contain;
-          -webkit-mask-repeat: no-repeat;
-          mask-repeat: no-repeat;
-          -webkit-mask-position: center;
-          mask-position: center;
-          background-color: #B89C23; /* dorado; cambia a #4377A3 si prefieres azul */
-          filter: drop-shadow(0 4px 8px rgba(0,0,0,0.25));
-        }
     </style>
 </head>
 <body class="bg-gray-100">
@@ -288,9 +262,9 @@
                     "Sabes que estás enamorado cuando no quieres acostarte porque la realidad es por fin mejor que tus sueños"
                 </p>
                 <div class="reveal-child delay-3 flex items-center gap-4 text-[#B89C23] mt-4 font-great-vibes text-5xl">
-                    <span class="date-number">30</span><span class="date-divider w-0.5 h-10 border-r-2 border-dotted border-[#B89C23]"></span>
-                    <span class="date-number">07</span><span class="date-divider w-0.5 h-10 border-r-2 border-dotted border-[#B89C23]"></span>
-                    <span class="date-number">27</span>
+                    <span class="date-number">15</span><span class="date-divider w-0.5 h-10 border-r-2 border-dotted border-[#B89C23]"></span>
+                    <span class="date-number">10</span><span class="date-divider w-0.5 h-10 border-r-2 border-dotted border-[#B89C23]"></span>
+                    <span class="date-number">26</span>
                 </div>
                 <p class="reveal-child delay-4 font-great-vibes text-3xl text-[#4377A3] mt-6">Te esperamos<br>para celebrar<br><span class="font-montserrat font-bold tracking-widest">JUNTOS</span></p>
             </div>
@@ -300,19 +274,14 @@
         <section class="snap-section w-full flex flex-col justify-center items-center bg-[#E0F2FE] py-4 px-4 reveal">
             <h2 class="reveal-child font-great-vibes text-4xl mb-2 text-[#4377A3] text-center leading-tight">Nuestros<br>Papás</h2>
             <div class="reveal-child delay-1 font-montserrat text-center space-y-0.5 text-2xl text-[#4377A3]">
-                <p>Jesús Salas Madrid</p>
+                <p>Jesús Salas Orozco</p>
                 <p>&</p>
                 <p>Dalila Orozco Ochoa</p>
                 <div class="py-2 flex items-center justify-center"><span class="w-8 h-px bg-[#4377A3]"></span><span class="px-2 heart-beat">♥</span><span class="w-8 h-px bg-[#4377A3]"></span></div>
                 <p>María Arcelia Palacios</p>
                 <p>&</p>
-                <p>César Torrero Ramos</p>
+                <p>Mauro César Torrero Ramos</p>
             </div>
-        </section>
-
-        <!-- Imagen intermedia -->
-        <section class="snap-section w-full flex flex-col justify-center items-center text-center bg-cover bg-center p-6 reveal"
-                 style="background-image: url('https://raw.githubusercontent.com/INVITACIONESMOMENTOSENCANTADOS/nuestra-boda-karen-y-jesus/main/Jesus%20y%20Karla%20(1).jpg');">
         </section>
 
         <!-- 4. Recepción -->
@@ -342,27 +311,28 @@
             </div>
         </section>
 
-        <!-- 6. Lluvia de Sobres -->
-        <section class="snap-section w-full flex flex-col justify-center items-center bg-cover bg-center p-8 text-center reveal"
-                 style="background-image: url('https://raw.githubusercontent.com/INVITACIONESMOMENTOSENCANTADOS/nuestra-boda-karen-y-jesus/main/Jesus%20y%20Karla%20(11).jpg');">
-            <div class="relative z-10 flex flex-col items-center justify-center h-full max-w-2xl px-4" style="transform: translateY(-22%);">
-                <h2 class="reveal-child font-great-vibes text-[3.13rem] mb-3 text-[#4377A3] italic" style="transform: translateY(-1%);">Lluvia de Sobres</h2>
-                
-                <p class="reveal-child delay-1 font-montserrat text-[0.6744rem] md:text-[0.7704rem] text-[#4377A3] leading-relaxed mb-3" style="transform: translateY(-3%);">
-                    El mayor regalo que podemos recibir es el honor de compartir este día tan especial con ustedes. Si además desean tener un detalle con nosotros, cualquier muestra de su cariño será recibida con profunda gratitud y nos acompañará en el inicio de esta nueva etapa de nuestras vidas.
-                </p>
-
-                <div class="reveal-child delay-2 flex justify-center items-end -mt-3" style="transform: translateY(-3%);">
-                    <div class="image-container">
-                        <div class="envelope-icon" role="img" aria-label="Lluvia de Sobres"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 7. Frase Especial -->
+        <!-- 6. Frase Especial -->
         <section class="snap-section w-full flex flex-col justify-center items-center text-center bg-cover bg-center p-6 reveal"
                  style="background-image: url('https://raw.githubusercontent.com/regina1503/nuestra-boda-karen-y-jesus/main/Jesus%20y%20Karla%20(7).jpg');">
+        </section>
+
+        <!-- 7. Lluvia de sobres -->
+        <section class="snap-section w-full flex flex-col justify-center items-center bg-cover bg-center p-6 text-center reveal"
+                 style="background-image: url('https://raw.githubusercontent.com/regina1503/nuestra-boda-karen-y-jesus/main/Jesus%20y%20Karla%20(12).jpg');">
+            <div class="absolute inset-0 bg-white/60"></div>
+            <div class="relative z-10 flex flex-col items-center max-w-sm">
+                <h2 class="reveal-child font-great-vibes text-5xl mb-6 text-[#4377A3]">Lluvia de sobres</h2>
+                <p class="reveal-child delay-1 font-montserrat text-[0.95rem] text-[#4377A3] mb-8 leading-relaxed">
+                    Tu presencia es el mejor regalo que podríamos recibir en este día tan especial. Pero si deseas tener un detalle con nosotros, cualquier muestra de tu cariño será recibida con mucho amor y gratitud.
+                </p>
+                <svg class="reveal-child delay-2" width="92" height="92" viewBox="0 0 100 100" fill="none">
+                    <rect x="8" y="26" width="84" height="58" rx="3" fill="#fdfbf5" stroke="#4377A3" stroke-width="1.5"/>
+                    <path d="M8 28 L50 60 L92 28" stroke="#4377A3" stroke-width="1.5" fill="none"/>
+                    <circle cx="50" cy="55" r="15" fill="#d9b65c"/>
+                    <circle cx="50" cy="55" r="15" fill="none" stroke="#8c6a1f" stroke-width="1"/>
+                    <text x="50" y="60" text-anchor="middle" font-family="Georgia, serif" font-size="13" fill="#fffaee">$</text>
+                </svg>
+            </div>
         </section>
 
         <!-- 8. Dress Code -->
@@ -377,11 +347,6 @@
                     <img src="https://github.com/regina1503/Mis-xv-a-os-Monserrat-Sarai/blob/main/87bd010aec6ebecaa9aef69642229a6b-Photoroom.png?raw=true" class="w-48 h-auto mx-auto mt-4" alt="Icono Vestimenta">
                 </p>
             </div>
-        </section>
-
-        <!-- Imagen intermedia -->
-        <section class="snap-section w-full flex flex-col justify-center items-center text-center bg-cover bg-center p-6 reveal"
-                 style="background-image: url('https://raw.githubusercontent.com/INVITACIONESMOMENTOSENCANTADOS/nuestra-boda-karen-y-jesus/main/Jesus%20y%20Karla%20(13).jpg');">
         </section>
 
         <!-- 9. Asistencia -->
@@ -403,7 +368,7 @@
 
         <!-- 10. Cierre -->
         <section class="snap-section w-full flex flex-col justify-start items-center p-6 text-center bg-cover bg-center reveal"
-                 style="background-image: url('https://github.com/regina1503/nuestra-boda-karen-y-jesus/raw/main/Jesus%20y%20Karla%20(10).jpg');">
+                 style="background-image: url('https://github.com/regina1503/nuestra-boda-karen-y-jesus/raw/main/Jesus%20y%20Karla%20(11).jpg');">
             <div class="relative z-10 flex flex-col items-center mt-[5vh]">
                 <h2 class="reveal-child font-great-vibes text-6xl text-[#B89C23] drop-shadow-md">¡Te esperamos!</h2>
             </div>
