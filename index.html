@@ -50,9 +50,10 @@
 
         .welcome-svg { width: 100%; height: 100%; max-width: 480px; }
 
-        .seal-group { cursor: pointer; transform-origin: center; transform-box: fill-box; transition: transform 0.35s ease; animation: sealPulse 2.8s ease-in-out infinite; }
-        .seal-group:hover { transform: scale(1.07); }
-        .seal-group:active { transform: scale(0.95); }
+        .seal-hit { cursor: pointer; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+        .seal-group { transform-origin: 0px 0px; transition: transform 0.35s ease; animation: sealPulse 2.8s ease-in-out infinite; }
+        @media (hover: hover) { .seal-hit:hover .seal-group { transform: scale(1.07); } }
+        .seal-hit:active .seal-group { transform: scale(0.95); }
         @keyframes sealPulse {
           0%, 100% { filter: drop-shadow(0 3px 6px rgba(30, 55, 85, 0.4)); }
           50% { filter: drop-shadow(0 4px 10px rgba(30, 55, 85, 0.55)); }
@@ -215,7 +216,9 @@
             <circle cx="160" cy="250" r="2.5" fill="#d9b65c"/>
 
             <!-- Sello circular -->
-            <g class="seal-group" transform="translate(135 250)" onclick="abrirInvitacion()">
+            <g class="seal-hit" transform="translate(135 250)" onclick="abrirInvitacion()">
+              <circle r="60" fill="transparent"/>
+              <g class="seal-group">
                 <circle r="52" fill="#5f8cb8"/>
                 <circle r="52" fill="none" stroke="#2e5680" stroke-width="1" opacity="0.4"/>
                 <circle r="44" fill="none" stroke="#d9b65c" stroke-width="1" opacity="0.55"/>
@@ -228,6 +231,7 @@
                     <path d="M0 -4 C-8 0 -12 8 -8 16"/>
                 </g>
                 <circle cx="0" cy="-28" r="2" fill="#d9b65c"/>
+              </g>
             </g>
 
             <!-- Texto vertical curvado -->
